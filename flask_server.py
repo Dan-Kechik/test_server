@@ -2,7 +2,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route('/print', methods=['POST'])
+@app.route('/printData', methods=['POST'])
 def receive_data():
     print("Received a POST request")
 
