@@ -29,10 +29,13 @@ def receive_data():
     client_name = metadata['form'].get('lead[values][main][inputs][name][value]', None)
     client_phone = metadata['form'].get('lead[values][main][inputs][phone][value]', None)
     
+    enevt_type = metadata['form'].get('event', None) or 'unknown event'
+    
     if client_name and client_phone:
         send_str = f'Name: {client_name}; Phone:{client_phone}'
     else:
         send_str = 'Obtained request without valid arguments'
+    send_str = '  '.join((enevt_type, send_str))
     
     api_key = os.environ['MTS_API_KEY']
     crm_phone = os.environ['CRM_ACCOUNT_PHONE']
