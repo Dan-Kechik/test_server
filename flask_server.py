@@ -1,4 +1,7 @@
 from flask import Flask, request
+import request
+import json
+import os
 
 app = Flask(__name__)
 
@@ -21,8 +24,14 @@ def receive_data():
     print("Request Metadata:")
     for key, value in metadata.items():
         print(f"{key}: {value}")
+    
+    api_key = os.environ['MTS_API_KEY']
+    crm_phone = os.environ['CRM_ACCOUNT_PHONE']
+    mng_phone = os.environ['MANAGER_PHONE']
+    payload = {'number': crm_phone, 'destination': mng_phone, 'text': 'MTS Exolve sended SMS via POST request'}
+    r = requests.post(r'https://api.exolve.ru/messaging/v1/SendSMS', headers={'Authorization': 'Bearer '+api_key}, data=json.dumps(payload))
 
-    return str(metadata), 200
+    return str(metadata)+f'\n\n---TEXT: '+r.text, 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
