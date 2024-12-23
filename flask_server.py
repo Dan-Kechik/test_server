@@ -1,5 +1,5 @@
 from flask import Flask, request
-import request
+import requests
 import json
 import os
 
