@@ -8,6 +8,7 @@ app = Flask(__name__)
 @app.route('/printData', methods=['POST'])
 def receive_data():
     print("Received a POST request")
+    print(request.query_string)
 
     # Collecting request metadata
     metadata = {
