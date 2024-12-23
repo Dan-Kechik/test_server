@@ -25,6 +25,7 @@ def receive_data():
     for key, value in metadata.items():
         print(f"{key}: {value}")
     
+    print(metadata['form'].keys())
     client_name = metadata['form']['lead[values][main][inputs][name][value]']
     client_phone = metadata['form']['lead[values][main][inputs][phone][value]']
     
