@@ -26,7 +26,7 @@ def receive_data():
         print(f"{key}: {value}")
     
     client_name = metadata['form']['lead[values][main][inputs][name][value]']
-    client_phone = metadata['form']['lead[values][main][inputs][phone][value]'']
+    client_phone = metadata['form']['lead[values][main][inputs][phone][value]']
     
     api_key = os.environ['MTS_API_KEY']
     crm_phone = os.environ['CRM_ACCOUNT_PHONE']
