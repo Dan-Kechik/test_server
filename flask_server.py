@@ -26,13 +26,18 @@ def receive_data():
         print(f"{key}: {value}")
     
     print(metadata['form'].keys())
-    client_name = metadata['form']['lead[values][main][inputs][name][value]']
-    client_phone = metadata['form']['lead[values][main][inputs][phone][value]']
+    client_name = metadata['form'].get('lead[values][main][inputs][name][value]', None)
+    client_phone = metadata['form'].get('lead[values][main][inputs][phone][value]', None)
+    
+    if client_name and client_phone:
+        send_str = f'Name: {client_name}; Phone:{client_phone}'
+    else:
+        send_str = 'Obtained request without valid arguments'
     
     api_key = os.environ['MTS_API_KEY']
     crm_phone = os.environ['CRM_ACCOUNT_PHONE']
     mng_phone = os.environ['MANAGER_PHONE']
-    payload = {'number': crm_phone, 'destination': mng_phone, 'text': f'Name: {client_name}; Phone:{client_phone}'}
+    payload = {'number': crm_phone, 'destination': mng_phone, 'text': send_str}
     r = requests.post(r'https://api.exolve.ru/messaging/v1/SendSMS', headers={'Authorization': 'Bearer '+api_key}, data=json.dumps(payload))
 
     return str(metadata)+f'\n\n---TEXT: '+r.text, 200
