@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
+from webargs.flaskparser import use_args
 import requests
 import json
 import os
@@ -6,7 +7,8 @@ import os
 app = Flask(__name__)
 
 @app.route('/printData', methods=['POST'])
-def receive_data():
+@use_args()
+def receive_data(args):
     print("Received a POST request")
 
     # Collecting request metadata
@@ -28,6 +30,10 @@ def receive_data():
     print(metadata['form'].keys())
     client_name = metadata['form'].get('lead[values][main][inputs][name][value]', None)
     client_phone = metadata['form'].get('lead[values][main][inputs][phone][value]', None)
+    
+    print('================')
+    print(args)
+    
     
     enevt_type = metadata['form'].get('event', None) or 'unknown event'
     
