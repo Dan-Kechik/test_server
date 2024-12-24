@@ -7,10 +7,10 @@ import os
 app = Flask(__name__)
 
 @app.route('/printData', methods=['POST'])
-@use_args({})
-def receive_data(args):
+def receive_data():
     print("Received a POST request")
-
+    print(request.args.to_dict())
+    print('================')
     # Collecting request metadata
     metadata = {
         "remote_addr": request.remote_addr,
@@ -30,9 +30,6 @@ def receive_data(args):
     print(metadata['form'].keys())
     client_name = metadata['form'].get('lead[values][main][inputs][name][value]', None)
     client_phone = metadata['form'].get('lead[values][main][inputs][phone][value]', None)
-    
-    print('================')
-    print(args)
     
     
     enevt_type = metadata['form'].get('event', None) or 'unknown event'
