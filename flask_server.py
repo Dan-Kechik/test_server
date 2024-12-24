@@ -37,11 +37,11 @@ def receive_data():
     print('-----')
     print(enevt_type)
     if client_name and client_phone:
-        send_str = f'Name {client_name}   Phone {client_phone}'
+        send_str = f'Name' #  {client_name}   Phone {client_phone}
     else:
         send_str = 'Obtained request without valid arguments'
     print(send_str)
-    send_str = '  '.join((enevt_type, send_str))
+    #send_str = '  '.join((enevt_type, send_str))
     print(send_str)
     api_key = os.environ['MTS_API_KEY']
     crm_phone = os.environ['CRM_ACCOUNT_PHONE']
