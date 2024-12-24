@@ -37,7 +37,7 @@ def receive_data():
     print('-----')
     print(enevt_type)
     if client_name and client_phone:
-        send_str = f'Name' #  {client_name}   Phone {client_phone}
+        send_str = f'Name  {client_name}' #   Phone {client_phone}
     else:
         send_str = 'Obtained request without valid arguments'
     print(send_str)
