@@ -1,5 +1,4 @@
 from flask import Flask, request
-from webargs.flaskparser import use_args
 import requests
 import json
 import os
@@ -27,7 +26,9 @@ def receive_data():
     for key, value in metadata.items():
         print(f"{key}: {value}")
     
-    print(metadata['form'].keys())
+    #print(metadata['form'].keys())
+    for key, value in metadata['form'].items():
+        print(f"{key}: {value}")
     client_name = metadata['form'].get('lead[values][main][inputs][name][value]', None)
     client_phone = metadata['form'].get('lead[values][main][inputs][phone][value]', None)
     
