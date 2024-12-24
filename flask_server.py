@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 @app.route('/printData', methods=['POST'])
-@use_args()
+@use_args({})
 def receive_data(args):
     print("Received a POST request")
 
