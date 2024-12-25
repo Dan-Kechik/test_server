@@ -13,9 +13,12 @@ def take_phone_by_id(client_id):
     "client_id": client_id
       }
     }
-    resp = requests.post('https://testing1111.envycrm.com/openapi/v1/client/getContacts/', 
+    resp = requests.post('https://myfavouritecrm.envycrm.com/openapi/v1/client/getContacts/', 
         params={'api_key': crm_api_key}, json=request_to_crm)
     print((resp.text))
+    if not resp.status_code == 200:
+        print('Can''t take client phone from CRM')
+        return None
     ans = json.loads(resp.text)['result']['contacts']
     for c in ans:
         if c['type_id'] == 1:
